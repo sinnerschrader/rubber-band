@@ -5,13 +5,13 @@ Unapologetically evergreen-only supporting iframe resizer
 
 ### Usage
 #### 1. Browserify
-* Install via npm `npm install --save rubberband`
+* Install via npm `npm install --save rubber-band`
 
 * In your host document
 
 ```javascript
 // content.js
-import {content} from 'rubberband';
+import {content} from 'rubber-band';
 content();
 ```
 
