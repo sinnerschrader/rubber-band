@@ -10,17 +10,22 @@ var _lodashThrottle = require('lodash.throttle');
 
 var _lodashThrottle2 = _interopRequireDefault(_lodashThrottle);
 
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
 var _defaults = require('../defaults');
 
 var _defaults2 = _interopRequireDefault(_defaults);
 
-var measurementElements = [document.documentElement, document.body];
-var measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight'];
-
 function content() {
 	var config = arguments[0] === undefined ? _defaults2['default'] : arguments[0];
 
-	var options = Object.assign({}, config, _defaults2['default']);
+	var measurementElements = [document.documentElement, document.body];
+	var measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight'];
+
+	var options = _objectAssign2['default']({}, config, _defaults2['default']);
+
 	var observer = null;
 
 	function getHeight() {

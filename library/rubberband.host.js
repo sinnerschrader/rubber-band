@@ -1,6 +1,6 @@
 'use strict';
 
-var _rubberband = require('./rubberband');
+var _ = require('./');
 
 var els = document.querySelectorAll('.js-rubberband');
-Array.prototype.slice.call(els).forEach(_rubberband.host);
+Array.prototype.slice.call(els).forEach(_.host);

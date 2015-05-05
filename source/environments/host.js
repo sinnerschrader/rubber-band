@@ -1,9 +1,12 @@
 import defaults from '../defaults';
+import objectAssign from 'object-assign';
 
 function host (frame, config = defaults) {
-	const options = Object.assign({}, config, defaults);
-	const callback = options.callback || function defaultCallback (height) {
-		frame.styles.height = `${height}px`;
+	const options = objectAssign({}, config, defaults);
+	const callback = options.callback || function defaultCallback (iframe, height) {
+		if (iframe) {
+			iframe.style.height = `${height}px`;
+		}
 	};
 
 	function onMessage (e) {
@@ -11,7 +14,7 @@ function host (frame, config = defaults) {
 			return;
 		}
 
-		if (e.data.id !== options.name) {
+		if (e.data.id !== frame.id) {
 			return;
 		}
 
@@ -39,7 +42,7 @@ function host (frame, config = defaults) {
 		return api;
 	}
 
-	start();
+	return start();
 }
 
 export default host;

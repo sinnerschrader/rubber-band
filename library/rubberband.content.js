@@ -1,5 +1,5 @@
 'use strict';
 
-var _rubberband = require('./rubberband');
+var _ = require('./');
 
-_rubberband.content();
+_.content();

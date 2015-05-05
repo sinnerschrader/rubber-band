@@ -32,7 +32,7 @@ let frames = Array.prototype.slice.call(els).map(host);
 <body>
 	<!-- host.html -->
 	<iframe src="./content.html" class="js-rubberband">
-	<script src="rubberband/library/rubberband.host.js" async="async"></script>
+	<script src="rubberband/distribution/rubberband.host.bundle.js" async="async"></script>
 </body>
 ```
 
@@ -41,7 +41,7 @@ let frames = Array.prototype.slice.call(els).map(host);
 ```html
 <body>
 	<!-- content.html -->
-	<script src="rubberband/library/rubberband.content.js" async="async"></script>
+	<script src="rubberband/distribution/rubberband.content.bundle.js" async="async"></script>
 </body>
 ```
 

@@ -2,10 +2,14 @@
   "name": "rubberband",
   "version": "0.1.0",
   "description": "Unapologetically evergreen-only supporting iframe resizer",
-  "main": "library/rubberband",
+  "main": "library/",
   "scripts": {
-    "build": "babel source --out-dir library",
-    "watch": "babel --watch source --out-dir library"
+    "start": "npm run watch",
+    "build": "npm run babel && npm run browserify",
+    "clean": "rm -rf ./library/** && rm -rf ./distribution/**",
+    "watch": "babel --watch source --out-dir library",
+    "babel": "babel source --out-dir library",
+    "browserify": "browserify library/rubberband.content.js -o distribution/rubberband.content.js && browserify library/rubberband.host.js -o distribution/rubberband.host.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +42,7 @@
     "eslint": "^0.20.0"
   },
   "dependencies": {
-    "lodash.throttle": "^3.0.2"
+    "lodash.throttle": "^3.0.2",
+    "object-assign": "^2.0.0"
   }
 }

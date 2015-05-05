@@ -10,12 +10,18 @@ var _defaults = require('../defaults');
 
 var _defaults2 = _interopRequireDefault(_defaults);
 
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
 function host(frame) {
 	var config = arguments[1] === undefined ? _defaults2['default'] : arguments[1];
 
-	var options = Object.assign({}, config, _defaults2['default']);
-	var callback = options.callback || function defaultCallback(height) {
-		frame.styles.height = '' + height + 'px';
+	var options = _objectAssign2['default']({}, config, _defaults2['default']);
+	var callback = options.callback || function defaultCallback(iframe, height) {
+		if (iframe) {
+			iframe.style.height = '' + height + 'px';
+		}
 	};
 
 	function onMessage(e) {
@@ -23,7 +29,7 @@ function host(frame) {
 			return;
 		}
 
-		if (e.data.id !== options.name) {
+		if (e.data.id !== frame.id) {
 			return;
 		}
 
@@ -51,7 +57,7 @@ function host(frame) {
 		return api;
 	}
 
-	start();
+	return start();
 }
 
 exports['default'] = host;

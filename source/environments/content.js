@@ -1,11 +1,14 @@
 import throttle from 'lodash.throttle';
+import objectAssign from 'object-assign';
+
 import defaults from '../defaults';
 
-const measurementElements = [document.documentElement, document.body];
-const measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight'];
-
 function content (config = defaults) {
-	const options = Object.assign({}, config, defaults);
+	const measurementElements = [document.documentElement, document.body];
+	const measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight'];
+
+	const options = objectAssign({}, config, defaults);
+
 	var observer = null;
 
 	function getHeight () {
