@@ -14,11 +14,11 @@ function content (config = defaults) {
 	function getHeight () {
 		let measurements = [];
 
-		for (let element of measurementElements) {
-			for (let method of measurementMethods) {
+		measurementElements.forEach(function measureElement (element) {
+			measurementMethods.forEach(function applyMeasure (method) {
 				measurements.push(element[method]);
-			}
-		}
+			});
+		});
 
 		return Math.max(...measurements);
 	}
