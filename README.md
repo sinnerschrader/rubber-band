@@ -58,7 +58,7 @@ let frames = Array.prototype.slice.call(els).map(host);
 			// Called with params
 			// * height (integer): Height to apply to iframe
 			// * frame (HTMLElement): iframe to apply the height to
-			frame.styles.height = `${height}px`;
+			frame.style.height = `${height}px`;
 		}
 	}
 ```
