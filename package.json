@@ -16,7 +16,8 @@
     "url": "git@git.sinnerschrader.com:patternplate/rubber-band.git"
   },
   "keywords": [
-    "patternplate"
+    "iframe",
+    "resizer"
   ],
   "author": {
     "name": "Team UX",
