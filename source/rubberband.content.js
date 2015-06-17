@@ -1,2 +1,2 @@
-import {content} from './';
+const content = require('./').content;
 content();

@@ -1,30 +1,17 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
+var throttle = require('lodash.throttle');
+var objectAssign = require('object-assign');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _lodashThrottle = require('lodash.throttle');
-
-var _lodashThrottle2 = _interopRequireDefault(_lodashThrottle);
-
-var _objectAssign = require('object-assign');
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-var _defaults = require('../defaults');
-
-var _defaults2 = _interopRequireDefault(_defaults);
+var defaults = require('../defaults');
 
 function content() {
-	var config = arguments[0] === undefined ? _defaults2['default'] : arguments[0];
+	var config = arguments[0] === undefined ? defaults : arguments[0];
 
 	var measurementElements = [document.documentElement, document.body];
 	var measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight'];
 
-	var options = _objectAssign2['default']({}, config, _defaults2['default']);
+	var options = objectAssign({}, config, defaults);
 
 	var observer = null;
 
@@ -41,6 +28,10 @@ function content() {
 	}
 
 	function send() {
+		if (!window.frameElement) {
+			return;
+		}
+
 		window.parent.postMessage({
 			type: options.name,
 			height: getHeight(),
@@ -48,14 +39,14 @@ function content() {
 		}, options.domain);
 	}
 
-	var throttledSend = _lodashThrottle2['default'](send, options.throttle);
+	var throttledSend = throttle(send, options.throttle);
 
 	function onMessage(e) {
 		if (e.data.type !== options.name) {
 			return;
 		}
 
-		if (e.data.id !== window.frameElement.id) {
+		if (!window.frameElement || e.data.id !== window.frameElement.id) {
 			return;
 		}
 
@@ -94,6 +85,10 @@ function content() {
 			return api;
 		}
 
+		if (!('addEventListener' in window)) {
+			return api;
+		}
+
 		window.addEventListener('message', onMessage);
 		window.addEventListener('load', throttledSend);
 		window.addEventListener('resize', throttledSend);
@@ -118,5 +113,4 @@ function content() {
 	return start();
 }
 
-exports['default'] = content;
-module.exports = exports['default'];
+module.exports = content;

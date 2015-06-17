@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('./');
+var host = require('./').host;
+var nodelistToArray = require('./utilities/nodelist-to-array');
 
-var els = document.querySelectorAll('.js-rubberband');
-Array.prototype.slice.call(els).forEach(_.host);
+var els = nodelistToArray(document.querySelectorAll('.js-rubberband'));
+els.forEach(host);

@@ -4,4 +4,4 @@ const defaults = {
 	throttle: 300
 };
 
-export default defaults;
+module.exports = defaults;

@@ -1,5 +1,5 @@
-import defaults from '../defaults';
-import objectAssign from 'object-assign';
+const defaults = require('../defaults');
+const objectAssign = require('object-assign');
 
 function host (frame, config = defaults) {
 	const options = objectAssign({}, config, defaults);
@@ -45,4 +45,4 @@ function host (frame, config = defaults) {
 	return start();
 }
 
-export default host;
+module.exports = host;

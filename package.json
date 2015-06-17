@@ -1,6 +1,6 @@
 {
   "name": "rubber-band",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Unapologetically evergreen-only supporting iframe resizer",
   "main": "library/",
   "scripts": {
@@ -43,7 +43,7 @@
     "eslint": "^0.20.0"
   },
   "dependencies": {
-    "lodash.throttle": "^3.0.2",
+    "lodash.throttle": "^3.0.3",
     "object-assign": "^2.0.0"
   }
 }

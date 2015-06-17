@@ -1,5 +1,4 @@
 'use strict';
 
-var _ = require('./');
-
-_.content();
+var content = require('./').content;
+content();

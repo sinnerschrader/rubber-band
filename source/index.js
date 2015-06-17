@@ -1,4 +1,4 @@
-import content from './environments/content';
-import host from './environments/host';
+const content = require('./environments/content');
+const host = require('./environments/host');
 
-export default {content, host};
+module.exports = {content, host};

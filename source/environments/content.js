@@ -1,7 +1,7 @@
-import throttle from 'lodash.throttle';
-import objectAssign from 'object-assign';
+const throttle = require('lodash.throttle');
+const objectAssign = require('object-assign');
 
-import defaults from '../defaults';
+const defaults = require('../defaults');
 
 function content (config = defaults) {
 	const measurementElements = [document.documentElement, document.body];
@@ -24,6 +24,10 @@ function content (config = defaults) {
 	}
 
 	function send () {
+		if (!window.frameElement) {
+			return;
+		}
+
 		window.parent.postMessage({
 			type: options.name,
 			height: getHeight(),
@@ -39,7 +43,7 @@ function content (config = defaults) {
 			return;
 		}
 
-		if (e.data.id !== window.frameElement.id) {
+		if (!window.frameElement || e.data.id !== window.frameElement.id) {
 			return;
 		}
 
@@ -78,6 +82,10 @@ function content (config = defaults) {
 			return api;
 		}
 
+		if (!('addEventListener' in window)) {
+			return api;
+		}
+
 		window.addEventListener('message', onMessage);
 		window.addEventListener('load', throttledSend);
 		window.addEventListener('resize', throttledSend);
@@ -102,4 +110,4 @@ function content (config = defaults) {
 	return start();
 }
 
-export default content;
+module.exports = content;

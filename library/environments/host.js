@@ -1,23 +1,12 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _defaults = require('../defaults');
-
-var _defaults2 = _interopRequireDefault(_defaults);
-
-var _objectAssign = require('object-assign');
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
+var defaults = require('../defaults');
+var objectAssign = require('object-assign');
 
 function host(frame) {
-	var config = arguments[1] === undefined ? _defaults2['default'] : arguments[1];
+	var config = arguments[1] === undefined ? defaults : arguments[1];
 
-	var options = _objectAssign2['default']({}, config, _defaults2['default']);
+	var options = objectAssign({}, config, defaults);
 	var callback = options.callback || function defaultCallback(iframe, height) {
 		if (iframe) {
 			iframe.style.height = '' + height + 'px';
@@ -60,5 +49,4 @@ function host(frame) {
 	return start();
 }
 
-exports['default'] = host;
-module.exports = exports['default'];
+module.exports = host;

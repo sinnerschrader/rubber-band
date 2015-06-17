@@ -1,4 +1,5 @@
-import {host} from './';
+const host = require('./').host;
+const nodelistToArray = require('./utilities/nodelist-to-array');
 
-let els = document.querySelectorAll('.js-rubberband');
-Array.prototype.slice.call(els).forEach(host);
+let els = nodelistToArray(document.querySelectorAll('.js-rubberband'));
+els.forEach(host);
