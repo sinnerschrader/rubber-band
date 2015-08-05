@@ -19,7 +19,7 @@ content();
 
 ```javascript
 // host.js
-import {host} from 'rubberband';
+import {host} from 'rubber-band';
 
 let els = document.querySelectorAll('.js-rubberband');
 let frames = Array.prototype.slice.call(els).map(host);
@@ -32,7 +32,7 @@ let frames = Array.prototype.slice.call(els).map(host);
 <body>
 	<!-- host.html -->
 	<iframe src="./content.html" class="js-rubberband">
-	<script src="rubberband/distribution/rubberband.host.bundle.js" async="async"></script>
+	<script src="rubberband/distribution/rubber-band.host.min.js" async="async"></script>
 </body>
 ```
 
@@ -41,7 +41,7 @@ let frames = Array.prototype.slice.call(els).map(host);
 ```html
 <body>
 	<!-- content.html -->
-	<script src="rubberband/distribution/rubberband.content.bundle.js" async="async"></script>
+	<script src="rubberband/distribution/rubber-band.content.min.js" async="async"></script>
 </body>
 ```
 

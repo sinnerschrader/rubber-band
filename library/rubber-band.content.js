@@ -1,0 +1,6 @@
+'use strict';
+
+var _ = require('./');
+
+(0, _.content)();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NvdXJjZS9ydWJiZXItYmFuZC5jb250ZW50LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O2dCQUFzQixJQUFJOztBQUUxQixNQUZRLE9BQU8sR0FFTixDQUFBIiwiZmlsZSI6InJ1YmJlci1iYW5kLmNvbnRlbnQuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge2NvbnRlbnR9IGZyb20gJy4vJ1xuXG5jb250ZW50KClcbiJdfQ==

@@ -1,48 +1,48 @@
-const defaults = require('../defaults');
-const objectAssign = require('object-assign');
+import defaults from '../defaults'
 
 function host (frame, config = defaults) {
-	const options = objectAssign({}, config, defaults);
-	const callback = options.callback || function defaultCallback (iframe, height) {
-		if (iframe) {
-			iframe.style.height = `${height}px`;
-		}
-	};
+  const options = {...config, ...defaults}
 
-	function onMessage (e) {
-		if (e.data.type !== options.name) {
-			return;
-		}
+  const callback = options.callback || function defaultCallback (iframe, height) {
+    if (iframe) {
+      iframe.style.height = `${height}px`
+    }
+  }
 
-		if (e.data.id !== frame.id) {
-			return;
-		}
+  function onMessage (e) {
+    if (e.data.type !== options.name) {
+      return
+    }
 
-		window.requestAnimationFrame(() => {
-			callback(frame, e.data.height);
-		});
-	}
+    if (e.data.id !== frame.id) {
+      return
+    }
 
-	function request () {
-		frame.contentWindow.postMessage({
-			type: options.name,
-			id: frame.id
-		}, options.domain);
-	}
+    window.requestAnimationFrame(() => {
+      callback(frame, e.data.height)
+    })
+  }
 
-	function stop () {
-		let api = {start, stop, request};
-		window.removeEventListener('message', onMessage);
-		return api;
-	}
+  function request () {
+    frame.contentWindow.postMessage({
+      type: options.name,
+      id: frame.id
+    }, options.domain)
+  }
 
-	function start () {
-		let api = {start, stop, request};
-		window.addEventListener('message', onMessage, false);
-		return api;
-	}
+  function stop () {
+    let api = {start, stop, request}
+    window.removeEventListener('message', onMessage)
+    return api
+  }
 
-	return start();
+  function start () {
+    let api = {start, stop, request}
+    window.addEventListener('message', onMessage, false)
+    return api
+  }
+
+  return start()
 }
 
-module.exports = host;
+export default host

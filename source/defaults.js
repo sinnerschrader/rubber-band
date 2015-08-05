@@ -1,7 +1,7 @@
 const defaults = {
-	name: 'rubberband',
-	domain: '*',
-	throttle: 300
-};
+  name: 'rubberband',
+  domain: '*',
+  throttle: 300
+}
 
-module.exports = defaults;
+export default defaults

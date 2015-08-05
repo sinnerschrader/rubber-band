@@ -4,12 +4,25 @@
   "description": "Unapologetically evergreen-only supporting iframe resizer",
   "main": "library/",
   "scripts": {
-    "start": "npm run watch",
+    "start": "npm run serve & npm run watch",
     "build": "npm run babel && npm run browserify",
+    "distribute": "npm run browserify && npm run uglify",
     "clean": "rm -rf ./library/** && rm -rf ./distribution/**",
-    "watch": "babel --watch source --out-dir library",
-    "babel": "babel source --out-dir library",
-    "browserify": "browserify library/rubberband.content.js -o distribution/rubberband.content.js && browserify library/rubberband.host.js -o distribution/rubberband.host.js"
+    "watch": "npm run babel -- --watch & npm run browserify-watch & npm run uglify-watch",
+    "babel": "babel source --out-dir library --source-maps inline",
+    "browserify": "mkdir -p distribution/ && npm run browserify-content && npm run browserify-host",
+    "browserify-host": "browserify library/rubber-band.host.js -o distribution/rubber-band.host.js && echo 'Bundled host'",
+    "browserify-content": "browserify library/rubber-band.content.js -o distribution/rubber-band.content.js && echo 'Bundled content'",
+    "browserify-watch": "npm run browserify-watch-content && npm run browserify-watch-host",
+    "browserify-watch-host": "chokidar 'library/**/*.js' -c 'npm run browserify-host'",
+    "browserify-watch-content": "chokidar 'library/**/*.js' -c 'npm run browserify-content'",
+    "uglify": "npm run uglify-host && npm run uglify-content",
+    "uglify-host": "uglifyjs distribution/rubber-band.host.js --compress --mangle > distribution/rubber-band.host.min.js && echo 'Uglified host'",
+    "uglify-content": "uglifyjs distribution/rubber-band.content.js --compress --mangle > distribution/rubber-band.content.min.js && echo 'Uglified content'",
+    "uglify-watch": "npm run uglify-watch-host & npm run uglify-watch-content",
+    "uglify-watch-host": "chokidar 'distribution/rubber-band.host.js' -c 'npm run uglify-host'",
+    "uglify-watch-content": "chokidar 'distribution/rubber-band.content.js' -c 'npm run uglify-content'",
+    "serve": "static ."
   },
   "repository": {
     "type": "git",
@@ -37,13 +50,13 @@
   },
   "devDependencies": {
     "babel": "^5.2.14",
-    "babel-eslint": "^3.0.1",
-    "babelify": "^6.0.2",
-    "browserify": "^10.1.0",
-    "eslint": "^0.20.0"
+    "babel-eslint": "^4.0.5",
+    "browserify": "^11.0.1",
+    "eslint": "^1.0.0",
+    "node-static": "^0.7.7",
+    "uglify-js": "^2.4.24"
   },
   "dependencies": {
-    "lodash.throttle": "^3.0.3",
-    "object-assign": "^2.0.0"
+    "lodash.throttle": "^3.0.3"
   }
 }

@@ -1,113 +1,111 @@
-const throttle = require('lodash.throttle');
-const objectAssign = require('object-assign');
-
-const defaults = require('../defaults');
+import throttle from 'lodash.throttle'
+import defaults from '../defaults'
 
 function content (config = defaults) {
-	const measurementElements = [document.documentElement, document.body];
-	const measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight'];
+  const measurementElements = [document.documentElement, document.body]
+  const measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight']
 
-	const options = objectAssign({}, config, defaults);
+  const options = {...defaults, ...config}
 
-	var observer = null;
+  var observer = null
 
-	function getHeight () {
-		let measurements = [];
+  function getHeight () {
+    let measurements = []
 
-		measurementElements.forEach(function measureElement (element) {
-			measurementMethods.forEach(function applyMeasure (method) {
-				measurements.push(element[method]);
-			});
-		});
+    measurementElements.forEach(function measureElement (element) {
+      measurementMethods.forEach(function applyMeasure (method) {
+        measurements.push(element[method])
+      })
+    })
 
-		return Math.max(...measurements);
-	}
+    return Math.max(...measurements)
+  }
 
-	function send () {
-		if (!window.frameElement) {
-			return;
-		}
+  function send () {
+    if (!window.frameElement) {
+      return
+    }
 
-		window.parent.postMessage({
-			type: options.name,
-			height: getHeight(),
-			id: window.frameElement.id
-		},
-		options.domain);
-	}
+    window.parent.postMessage({
+      type: options.name,
+      height: getHeight(),
+      id: window.frameElement.id
+    },
+    options.domain)
+  }
 
-	const throttledSend = throttle(send, options.throttle);
+  const throttledSend = throttle(send, options.throttle)
 
-	function onMessage (e) {
-		if (e.data.type !== options.name) {
-			return;
-		}
+  function onMessage (e) {
+    if (e.data.type !== options.name) {
+      return
+    }
 
-		if (!window.frameElement || e.data.id !== window.frameElement.id) {
-			return;
-		}
+    if (!window.frameElement || e.data.id !== window.frameElement.id) {
+      return
+    }
 
-		throttledSend(e);
-	}
+    throttledSend(e)
+  }
 
-	function stop () {
-		let api = {observer, stop, start};
+  function stop () {
+    let api = {observer, stop, start}
 
-		window.removeEventListener('message', onMessage);
-		window.removeEventListener('load', throttledSend);
-		window.removeEventListener('resize', throttledSend);
-		document.body.removeEventListener('transitionend', throttledSend);
+    window.removeEventListener('message', onMessage)
+    window.removeEventListener('load', throttledSend)
+    window.removeEventListener('resize', throttledSend)
+    document.body.removeEventListener('transitionend', throttledSend)
 
-		if (!observer) {
-			return api;
-		}
+    if (!observer) {
+      return api
+    }
 
-		observer.disconnect();
+    observer.disconnect()
 
-		return api;
-	}
+    return api
+  }
 
-	function start () {
-		let api = {observer, stop, start};
+  function start () {
+    let api = {observer, stop, start}
 
-		if (!('frameElement' in window)) {
-			return api;
-		}
+    if (!('frameElement' in window)) {
+      return api
+    }
 
-		if (!('parent' in window)) {
-			return api;
-		}
+    if (!('parent' in window)) {
+      return api
+    }
 
-		if (!('postMessage' in window.parent)) {
-			return api;
-		}
+    if (!('postMessage' in window.parent)) {
+      return api
+    }
 
-		if (!('addEventListener' in window)) {
-			return api;
-		}
+    if (!('addEventListener' in window)) {
+      return api
+    }
 
-		window.addEventListener('message', onMessage);
-		window.addEventListener('load', throttledSend);
-		window.addEventListener('resize', throttledSend);
-		document.body.addEventListener('transitionend', throttledSend);
+    window.addEventListener('message', onMessage)
+    window.addEventListener('load', throttledSend)
+    window.addEventListener('resize', throttledSend)
+    document.body.addEventListener('transitionend', throttledSend)
 
-		if (!('MutationObserver' in window)) {
-			return api;
-		}
+    if (!('MutationObserver' in window)) {
+      return api
+    }
 
-		observer = observer || new window.MutationObserver(throttledSend);
+    observer = observer || new window.MutationObserver(throttledSend)
 
-		observer.observe(document.body, {
-			childList: true,
-			attributes: true,
-			characterData: true,
-			subtree: true
-		});
+    observer.observe(document.body, {
+      childList: true,
+      attributes: true,
+      characterData: true,
+      subtree: true
+    })
 
-		return api;
-	}
+    return api
+  }
 
-	return start();
+  return start()
 }
 
-module.exports = content;
+module.exports = content
