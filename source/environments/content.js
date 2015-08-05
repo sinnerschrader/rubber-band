@@ -1,22 +1,26 @@
 import throttle from 'lodash.throttle'
+
+import {measureScrollHeight, measureClientHeight, measureOffsetHeight} from '../measurements'
 import defaults from '../defaults'
 
 function content (config = defaults) {
   const measurementElements = [document.documentElement, document.body]
-  const measurementMethods = ['scrollHeight', 'offsetHeight', 'clientHeight']
+  const measurementFunctions = [measureScrollHeight, measureClientHeight, measureOffsetHeight]
 
   const options = {...defaults, ...config}
 
   var observer = null
 
   function getHeight () {
-    let measurements = []
+    let measurements = measurementElements.reduce(function measureElement (results, element) {
+      let elementMeasurements = measurementFunctions
+        .map(function applyMeasurement (measurementFunction) {
+          return measurementFunction(element)
+        })
+        .filter(measurement => typeof measurement !== 'undefined')
 
-    measurementElements.forEach(function measureElement (element) {
-      measurementMethods.forEach(function applyMeasure (method) {
-        measurements.push(element[method])
-      })
-    })
+      return [...results, ...elementMeasurements]
+    }, [])
 
     return Math.max(...measurements)
   }

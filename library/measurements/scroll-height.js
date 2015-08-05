@@ -1,0 +1,12 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+function scrollHeight(element) {
+	return element.scrollHeight;
+}
+
+exports["default"] = scrollHeight;
+module.exports = exports["default"];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NvdXJjZS9tZWFzdXJlbWVudHMvc2Nyb2xsLWhlaWdodC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLFNBQVMsWUFBWSxDQUFFLE9BQU8sRUFBRTtBQUMvQixRQUFPLE9BQU8sQ0FBQyxZQUFZLENBQUE7Q0FDM0I7O3FCQUVjLFlBQVkiLCJmaWxlIjoic2Nyb2xsLWhlaWdodC5qcyIsInNvdXJjZXNDb250ZW50IjpbImZ1bmN0aW9uIHNjcm9sbEhlaWdodCAoZWxlbWVudCkge1xuXHRyZXR1cm4gZWxlbWVudC5zY3JvbGxIZWlnaHRcbn1cblxuZXhwb3J0IGRlZmF1bHQgc2Nyb2xsSGVpZ2h0XG4iXX0=
