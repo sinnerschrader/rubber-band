@@ -1,15 +1,4 @@
-* {
-	box-sizing: border-box;
-}
 :root,
-body {
-  min-height: 100%;
-  min-width: 320px;
-  margin: 0;
-  padding: 0;
-  font: 14.4px/22.5px Helvetica, Arial, sans-serif;
-  color: #2f3538;
-}
 body {
 	margin: 20px;
 	padding: 20px;

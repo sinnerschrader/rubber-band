@@ -4,7 +4,7 @@ import {measureScrollHeight, measureClientHeight, measureOffsetHeight} from '../
 import defaults from '../defaults'
 
 function content (config = defaults) {
-  const measurementElements = [document.documentElement, document.body]
+  const measurementElements = [document.body, document.documentElement]
   const measurementFunctions = [measureScrollHeight, measureClientHeight, measureOffsetHeight]
 
   const options = {...defaults, ...config}
@@ -87,6 +87,10 @@ function content (config = defaults) {
     if (!('addEventListener' in window)) {
       return api
     }
+
+    // Disallow margin and padding on measurementElements
+    measurementElements.forEach(measurementElement => measurementElement.style.margin = 0)
+    measurementElements.forEach(measurementElement => measurementElement.style.padding = 0)
 
     window.addEventListener('message', onMessage)
     window.addEventListener('load', throttledSend)
