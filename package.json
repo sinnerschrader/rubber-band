@@ -1,6 +1,6 @@
 {
   "name": "rubber-band",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Unapologetically evergreen-only supporting iframe resizer",
   "main": "library/",
   "scripts": {
