@@ -49,14 +49,14 @@
     "npm": ">= 2.5.1"
   },
   "devDependencies": {
-    "babel": "^5.2.14",
-    "babel-eslint": "^4.0.5",
-    "browserify": "^11.0.1",
-    "eslint": "^1.0.0",
+    "babel": "^6.23.0",
+    "babel-eslint": "^7.1.1",
+    "browserify": "^14.1.0",
+    "eslint": "^3.17.0",
     "node-static": "^0.7.7",
     "uglify-js": "^2.4.24"
   },
   "dependencies": {
-    "lodash.throttle": "^3.0.3"
+    "lodash.throttle": "^4.1.1"
   }
 }
