@@ -1,5 +1,7 @@
 rubberband
 ----------
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/sinnerschrader/rubber-band.svg)](https://greenkeeper.io/)
 Unapologetically evergreen-only supporting iframe resizer
 
 
